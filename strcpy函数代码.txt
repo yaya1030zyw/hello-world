@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h> // 包含用于 malloc 函数的头文件
+
+char* StrCpy(const char* src) {
+    // 计算源字符串的长度
+    int len = 0;
+    while (src[len] != '\0') {
+        len++;
+    }
+
+    // 用 malloc 分配足够的内存空间，包括 '\0'
+    char* destination = (char*)malloc((len + 1) * sizeof(char));
+
+    // 复制源字符串到新的内存空间
+    for (int i = 0; i < len; i++) {
+        destination[i] = src[i];
+    }
+
+    // 在新内存空间的末尾放入 '\0'
+    destination[len] = '\0';
+
+    // 返回新的内存空间的指针
+    return destination;
+}
+
+int main() {
+    const char* source = "Hello, World!";
+
+    // 调用自定义的字符拷贝函数
+    char* destination = StrCpy(source);
+
+    // 输出结果
+    printf("Source: %s\n", source);
+    printf("Destination: %s\n", destination);
+
+    // 释放动态分配的内存
+    free(destination);
+
+    return 0;
+}
